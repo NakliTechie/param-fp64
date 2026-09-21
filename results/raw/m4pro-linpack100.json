@@ -1,0 +1,146 @@
+{
+ "workload": "linpack100",
+ "machine": "m4pro",
+ "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+ "flags": "-O2 -std=c99 -fno-fast-math",
+ "load1_before": 3.18701171875,
+ "busy_before": 0,
+ "thermal_before": "no-thermal-warning-recorded",
+ "cold": {
+  "kernel": "linpack100",
+  "n": 100,
+  "reps": 32768,
+  "seconds": 4.4e-05,
+  "mflops": 15582.565,
+  "resid": 8.468e-14
+ },
+ "sustained": [
+  {
+   "kernel": "linpack100",
+   "n": 100,
+   "reps": 32768,
+   "seconds": 4.4e-05,
+   "mflops": 15535.194,
+   "resid": 8.468e-14
+  },
+  {
+   "kernel": "linpack100",
+   "n": 100,
+   "reps": 32768,
+   "seconds": 4.4e-05,
+   "mflops": 15554.073,
+   "resid": 8.468e-14
+  },
+  {
+   "kernel": "linpack100",
+   "n": 100,
+   "reps": 32768,
+   "seconds": 4.4e-05,
+   "mflops": 15521.209,
+   "resid": 8.468e-14
+  },
+  {
+   "kernel": "linpack100",
+   "n": 100,
+   "reps": 32768,
+   "seconds": 4.4e-05,
+   "mflops": 15472.423,
+   "resid": 8.468e-14
+  },
+  {
+   "kernel": "linpack100",
+   "n": 100,
+   "reps": 32768,
+   "seconds": 4.4e-05,
+   "mflops": 15528.397,
+   "resid": 8.468e-14
+  }
+ ],
+ "throughput": {
+  "per_process": [
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14584.413,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14560.841,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14571.251,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14572.483,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14580.349,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14479.583,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14475.61,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14462.659,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.7e-05,
+    "mflops": 14476.989,
+    "resid": 8.468e-14
+   },
+   {
+    "kernel": "linpack100",
+    "n": 100,
+    "reps": 65536,
+    "seconds": 4.8e-05,
+    "mflops": 14453.503,
+    "resid": 8.468e-14
+   }
+  ],
+  "mflops": 145217.681
+ },
+ "timestamp": "2026-09-21T18:31:37",
+ "load1_after": 3.18701171875
+}

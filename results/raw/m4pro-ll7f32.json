@@ -1,0 +1,162 @@
+{
+ "workload": "ll7f32",
+ "machine": "m4pro",
+ "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+ "flags": "-O2 -std=c99 -fno-fast-math",
+ "load1_before": 2.421875,
+ "busy_before": 0,
+ "thermal_before": "no-thermal-warning-recorded",
+ "cold": {
+  "kernel": "ll7",
+  "precision": "fp32",
+  "n": 995,
+  "reps": 8192000,
+  "seconds": 1.669711,
+  "mflops": 78107.313,
+  "checksum": 43410740.0
+ },
+ "sustained": [
+  {
+   "kernel": "ll7",
+   "precision": "fp32",
+   "n": 995,
+   "reps": 8192000,
+   "seconds": 1.673502,
+   "mflops": 77930.376,
+   "checksum": 43410740.0
+  },
+  {
+   "kernel": "ll7",
+   "precision": "fp32",
+   "n": 995,
+   "reps": 8192000,
+   "seconds": 1.67426,
+   "mflops": 77895.094,
+   "checksum": 43410740.0
+  },
+  {
+   "kernel": "ll7",
+   "precision": "fp32",
+   "n": 995,
+   "reps": 8192000,
+   "seconds": 1.673679,
+   "mflops": 77922.134,
+   "checksum": 43410740.0
+  },
+  {
+   "kernel": "ll7",
+   "precision": "fp32",
+   "n": 995,
+   "reps": 8192000,
+   "seconds": 1.676871,
+   "mflops": 77773.806,
+   "checksum": 43410740.0
+  },
+  {
+   "kernel": "ll7",
+   "precision": "fp32",
+   "n": 995,
+   "reps": 8192000,
+   "seconds": 1.676088,
+   "mflops": 77810.139,
+   "checksum": 43410740.0
+  }
+ ],
+ "throughput": {
+  "per_process": [
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.760659,
+    "mflops": 69358.397,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.732408,
+    "mflops": 69883.378,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.77054,
+    "mflops": 69176.638,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.72705,
+    "mflops": 69983.842,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.774066,
+    "mflops": 69112.008,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.742697,
+    "mflops": 69691.263,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.727939,
+    "mflops": 69967.153,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.760338,
+    "mflops": 69364.318,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.756162,
+    "mflops": 69441.435,
+    "checksum": 86825100.0
+   },
+   {
+    "kernel": "ll7",
+    "precision": "fp32",
+    "n": 995,
+    "reps": 16384000,
+    "seconds": 3.739861,
+    "mflops": 69744.111,
+    "checksum": 86825100.0
+   }
+  ],
+  "mflops": 695722.5430000001
+ },
+ "timestamp": "2026-09-21T18:30:08",
+ "load1_after": 2.421875
+}
