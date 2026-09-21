@@ -104,7 +104,7 @@ def load_ok(quick):
     print(f"load1={load1:.2f} busy_procs={len(busy)}")
     if quick:
         return True
-    if load1 > 2.0 or busy:
+    if load1 > LOAD_MAX or busy:
         for b in busy:
             print("  busy:", b.strip()[:100])
         print("machine not quiet; refusing full run (use --quick to override for a smoke test)")
