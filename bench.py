@@ -19,6 +19,8 @@ CC = os.environ.get("CC", "cc")
 RUNS = 5
 MIN_S = 1.0
 IDLE_S = 60
+LOAD_MAX = 4.0  # 1-min load average ceiling; our own 10-process throughput cell lifts it for minutes, so the real guard is busy_procs
+
 COLUMNS = ["workload", "machine", "cores", "mode", "precision", "mflops", "source",
            "compiler", "flags", "runs", "thermal", "citation"]
 WORKLOADS = {  # id -> (binary, args)
@@ -89,11 +91,16 @@ def run_parallel(wid, nproc, min_s=MIN_S):
     return {"per_process": outs, "mflops": sum(o["mflops"] for o in outs)}
 
 
+def busy_procs():
+    """Other processes using >40% CPU. Our own kernels are excluded by path."""
+    return [l for l in sh(["ps", "-Ao", "%cpu,comm"]).splitlines()[1:]
+            if float(l.split()[0]) > 40 and "bench.py" not in l and str(BUILD) not in l]
+
+
 def load_ok(quick):
     """A benchmark taken on a busy machine is not a benchmark. Refuse unless quiet."""
     load1 = os.getloadavg()[0]
-    busy = [l for l in sh(["ps", "-Ao", "%cpu,comm"]).splitlines()[1:]
-            if float(l.split()[0]) > 40 and "bench.py" not in l]
+    busy = busy_procs()
     print(f"load1={load1:.2f} busy_procs={len(busy)}")
     if quick:
         return True
@@ -120,6 +127,10 @@ def run(quick=False):
         # cold: idle first, then a single run
         print(f"[{wid}] idling {idle}s for cold cell", flush=True)
         time.sleep(idle)
+        others = busy_procs()
+        if not quick and (os.getloadavg()[0] > LOAD_MAX or others):
+            print(f"[{wid}] load1={os.getloadavg()[0]:.2f} busy={len(others)}; aborting run, nothing written", flush=True)
+            sys.exit(3)
         therm = thermal_state()
         cold = run_once(wid)
         # sustained: back-to-back runs, median
@@ -128,9 +139,10 @@ def run(quick=False):
         # throughput: ncores independent processes at once
         par = run_parallel(wid, ncores)
         raw = {"workload": wid, "machine": mid, "compiler": comp, "flags": flags,
-               "load1_before": os.getloadavg()[0],
+               "load1_before": os.getloadavg()[0], "busy_before": len(others),
                "thermal_before": therm, "cold": cold, "sustained": sus, "throughput": par,
                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S")}
+        raw["load1_after"] = os.getloadavg()[0]
         (RAW / f"{mid}-{wid}.json").write_text(json.dumps(raw, indent=1))
         base = dict(workload=wid, precision=cold.get("precision", "fp64"), source="measured", compiler=comp,
                     flags=flags, citation="")
@@ -191,6 +203,17 @@ def check():
             float(r.get("mflops", ""))
         except ValueError:
             errs.append(f"{where}: mflops not numeric")
+    for r in rows:
+        if r.get("source") == "measured":
+            mid = r["machine"].rsplit("-", 1)[0]
+            rawf = RAW / f"{mid}-{r['workload']}.json"
+            if not rawf.exists():
+                errs.append(f"measured cell {r['workload']}/{r['machine']} has no raw file {rawf.name}")
+                continue
+            d = json.loads(rawf.read_text())
+            worst = max(d.get("load1_before", 99), d.get("load1_after", 99))
+            if worst > LOAD_MAX or d.get("busy_before", 1):
+                errs.append(f"measured cell {r['workload']}/{r['machine']}: load {worst:.2f} (max {LOAD_MAX}) or other busy processes ({d.get('busy_before')}) during the run ({rawf.name})")
     for e in errs:
         print("FAIL", e)
     print(f"check: {len(rows)} rows, {len(errs)} violations")
